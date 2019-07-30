@@ -120,7 +120,8 @@ def update_thread(**payload):
         print('yay')
         data = payload["data"]
         web_client = payload["web_client"]
-        user_id = data["user"]
+        # channel_id = data["channel_id"]
+        # user_id = data["user"]
 
         # Get the original tutorial sent.
         onboarding_tutorial = onboarding_tutorials_sent[channel_id][user_id]
