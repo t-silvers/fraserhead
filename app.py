@@ -117,11 +117,11 @@ def update_thread(**payload):
     subtype = payload["data"].get("subtype")
 
     if subtype == "message_replied":
-        print('yay')
+
         data = payload["data"]
         web_client = payload["web_client"]
-        # channel_id = data["channel_id"]
-        # user_id = data["user"]
+        channel_id = data.get("channel_id")
+        user_id = data.get("message")["user"]
 
         # Get the original tutorial sent.
         onboarding_tutorial = onboarding_tutorials_sent[channel_id][user_id]
