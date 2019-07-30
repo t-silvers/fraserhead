@@ -68,7 +68,7 @@ class OnboardingTutorial:
     def _get_thread_block(self):
         task_checkmark = self._get_checkmark(self.thread_task_completed)
         text = (
-            f"{task_checkmark} *Pin this message* :scroll:\n"
+            f"{task_checkmark} *Start a thread* :scroll:\n"
             "Threads keep discussions in Slack organized. A thread will remain connected to its original message, "
             " and only those that have contributed to it or who are following it will be notified of new replies. "
             "(Unless you check the box to the left of Also send to #channel-name.)"
