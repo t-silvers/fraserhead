@@ -109,7 +109,7 @@ def update_pin(**payload):
 # =============== Thread a message ================ #
 # When a users threads a message, the event is a message of
 # subtype message_replied.
-@slack.RTMClient.run_on(event="message")
+@slack.RTMClient.run_on(event="message.")
 def update_thread(**payload):
     """Update onboarding welcome message after receiving a "pin_added"
     event from Slack. Update timestamp for welcome message as well.
