@@ -120,8 +120,10 @@ def update_thread(**payload):
 
         data = payload["data"]
         web_client = payload["web_client"]
-        channel_id = data.get("channel_id")
-        user_id = data.get("message").get("replies")[0]["user"]
+        # channel_id = data.get("channel_id")
+        # user_id = data.get("message").get("replies")[0]["user"]
+        channel_id = data.get("channel")
+        user_id = data.get("user")
 
         start_onboarding(web_client, user_id, channel_id)
 
