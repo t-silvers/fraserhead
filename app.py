@@ -121,25 +121,24 @@ def update_thread(**payload):
         data = payload["data"]
         web_client = payload["web_client"]
         channel_id = data.get("channel")
-        # user_id = data.get("user")
-        user_id = data.get("message").get("user")
+        user_id = data.get("user")
 
-        # start_onboarding(web_client, user_id, channel_id)
-
-        # Get the original tutorial sent.
-        onboarding_tutorial = onboarding_tutorials_sent[channel_id][user_id]
-
-        # Mark the pin task as completed.
-        onboarding_tutorial.thread_task_completed = True
-
-        # Get the new message payload
-        message = onboarding_tutorial.get_message_payload()
-
-        # Post the updated message in Slack
-        updated_message = web_client.chat_update(**message)
-
-        # Update the timestamp saved on the onboarding tutorial object
-        onboarding_tutorial.timestamp = updated_message["ts"]
+        start_onboarding(web_client, user_id, channel_id)
+        #
+        # # Get the original tutorial sent.
+        # onboarding_tutorial = onboarding_tutorials_sent[channel_id][user_id]
+        #
+        # # Mark the pin task as completed.
+        # onboarding_tutorial.thread_task_completed = True
+        #
+        # # Get the new message payload
+        # message = onboarding_tutorial.get_message_payload()
+        #
+        # # Post the updated message in Slack
+        # updated_message = web_client.chat_update(**message)
+        #
+        # # Update the timestamp saved on the onboarding tutorial object
+        # onboarding_tutorial.timestamp = updated_message["ts"]
 
 # ============== Message Events ============= #
 # When a user sends a DM, the event type will be 'message'.
