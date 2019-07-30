@@ -107,8 +107,8 @@ def update_pin(**payload):
     onboarding_tutorial.timestamp = updated_message["ts"]
 
 # =============== Thread a message ================ #
-# When a users pins a message the type of the event will be 'pin_added'.
-# Here we'll link the update_pin callback to the 'reaction_added' event.
+# When a users threads a message, the event is a message of
+# subtype message_replied.
 @slack.RTMClient.run_on(event="message")
 def update_thread(**payload):
     """Update onboarding welcome message after receiving a "pin_added"

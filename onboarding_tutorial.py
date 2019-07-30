@@ -68,7 +68,7 @@ class OnboardingTutorial:
     def _get_thread_block(self):
         task_checkmark = self._get_checkmark(self.thread_task_completed)
         text = (
-            f"{task_checkmark} *Pin this message* :round_pushpin:\n"
+            f"{task_checkmark} *Pin this message* :scroll:\n"
             "Important messages and files can be pinned to the details pane in any channel or"
             " direct message, including group messages, for easy reference."
         )
