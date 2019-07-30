@@ -81,8 +81,8 @@ class OnboardingTutorial:
     @staticmethod
     def _get_checkmark(task_completed: bool) -> str:
         if task_completed:
-            return ":white_check_mark:"
-        return ":white_large_square:"
+            return ":hunter-yas:"
+        return ":shiran:"
 
     @staticmethod
     def _get_task_block(text, information):
