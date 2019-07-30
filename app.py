@@ -114,7 +114,7 @@ def update_thread(**payload):
     """Update onboarding welcome message after receiving a "pin_added"
     event from Slack. Update timestamp for welcome message as well.
     """
-    subtype = payload["data"]["subtype"]
+    subtype = payload["data"].get("subtype")
 
     if subtype == "message_replied":
         print('yay')
