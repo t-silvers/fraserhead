@@ -15,8 +15,8 @@ class OnboardingTutorial:
 
     def __init__(self, channel):
         self.channel = channel
-        self.username = "pythonboardingbot"
-        self.icon_emoji = ":robot_face:"
+        self.username = "Fraserhead"
+        self.icon_emoji = ":hunter-yas:"
         self.timestamp = ""
         self.reaction_task_completed = False
         self.pin_task_completed = False
