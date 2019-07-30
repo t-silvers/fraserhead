@@ -6,7 +6,7 @@ class OnboardingTutorial:
         "text": {
             "type": "mrkdwn",
             "text": (
-                "Welcome to Slack! :wave: We're so glad you're here. :blush:\n\n"
+                "Welcome to Fraser Lab! :wave: We're so glad you're here. :blush:\n\n"
                 "*Get started by completing the steps below:*"
             ),
         },
@@ -69,12 +69,13 @@ class OnboardingTutorial:
         task_checkmark = self._get_checkmark(self.thread_task_completed)
         text = (
             f"{task_checkmark} *Pin this message* :scroll:\n"
-            "Important messages and files can be pinned to the details pane in any channel or"
-            " direct message, including group messages, for easy reference."
+            "Threads keep discussions in Slack organized. A thread will remain connected to its original message, "
+            " and only those that have contributed to it or who are following it will be notified of new replies. "
+            "(Unless you check the box to the left of Also send to #channel-name.)"
         )
         information = (
-            ":information_source: *<https://get.slack.help/hc/en-us/articles/205239997-Pinning-messages-and-files"
-            "|Learn How to Pin a Message>*"
+            ":information_source: *<https://get.slack.help/hc/en-us/articles/115000769927-Use-threads-to-organize-discussions-#-start-or-reply-to-a-thread"
+            "|Learn How to Start a Thread>*"
         )
         return self._get_task_block(text, information)
 
