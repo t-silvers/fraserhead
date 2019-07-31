@@ -60,9 +60,9 @@ class WikiTutorial:
             "Info on the lab, resources, protocols, and computational guidance"
             " can be found on the wiki. Contributing to the wiki is an important duty for all labmembers."
             " Type `wiki` in a Direct Message to yourself for the link! "
-            " After logging in to Medwiki using your SUnet credentials, slack Thomas for access to our wiki."
-            ":information_source: *<https://app.slack.com/client/T03KX6SN3/C03KX6SP9/user_profile/W9ZFK3AG6"
-            "|Learn How to Access a Stanford School of Medicine Medwiki>*"
+            " After logging in to Medwiki using your SUnet credentials,"
+            "*<https://app.slack.com/client/T03KX6SN3/D3NGU2W65/user_profile/W9ZFK3AG6"
+            "|slack Thomas for access to our wiki>* ."
         )
         information = (
             ":information_source: *<https://stanford.service-now.com/it_services?id=kb_article&sys_id=e6a0d3cc13c33e00d08ebda12244b0b2"
