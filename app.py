@@ -161,12 +161,6 @@ def update_thread(**payload):
         channel_id = data.get("channel")
         user_id = data.get("message").get("replies")[0].get("user")
 
-        # client = slack.WebClient(token=slack_token)
-        # client.chat_postMessage(
-        #   channel=channel_id,
-        #   text="User id is %s\n Channel is %s" % (user_id, channel_id)
-        # )
-
         # Get the original tutorial sent.
         onboarding_tutorial = onboarding_tutorials_sent[channel_id][user_id]
 
@@ -185,8 +179,8 @@ def update_thread(**payload):
         # Check whether all tasks are completed
         slack_done(onboarding_tutorial, channel_id)
 
-# ============== All done event ============= #
-def slack_done(tutorial, channel):
+# ============== Slack tutorial done event ============= #
+def slack_done(tutorial, channel, silent=True):
 
     if tutorial.thread_task_completed & tutorial.pin_task_completed & tutorial.reaction_task_completed:
 
@@ -196,30 +190,35 @@ def slack_done(tutorial, channel):
           text="Congrats :tada:! You're done learning about slack :celebrate:. We depend heavily on slack here.\n Write `Tell me about the lab` to continue."
         )
 
+    else:
+        if silent=False: return False
+
 # ############## Wiki Tutorial ############## #
 
-# =============== Explore the wiki ================ #
-# When a users threads a message, the event is a message of
-# subtype message_replied.
-@slack.RTMClient.run_on(event="message")
-def update_thread(**payload):
-    """Update onboarding welcome message after receiving a "pin_added"
+# =============== Lab calendar ================ #
+@slack.RTMClient.run_on(event="reaction_added")
+def update_calendar(**payload):
+    """Update onboarding welcome message after receiving a "reaction_added"
     event from Slack. Update timestamp for welcome message as well.
     """
-    text = payload["data"].get("text")
+    data = payload["data"]
+    web_client = payload["web_client"]
+    channel_id = data["item"]["channel"]
+    user_id = data["user"]
+    reaction = data.get("reaction")
 
-    if text == "wiki":
+    # Get the original tutorial sent.
+    # onboarding_tutorial = onboarding_tutorials_sent[channel_id][user_id]
 
-        data = payload["data"]
-        web_client = payload["web_client"]
-        channel_id = data.get("channel")
-        user_id = data.get("user")
+    # if slack_done(onboarding_tutorial, channel_id, silent=False)
+
+    if reaction == "+1":
 
         # Get the original tutorial sent.
         wiki_tutorial = wiki_tutorials_sent[channel_id][user_id]
 
-        # Mark the pin task as completed.
-        wiki_tutorial.wiki_task_completed = True
+        # Mark the reaction task as completed.
+        wiki_tutorial.calendar_task_completed = True
 
         # Get the new message payload
         message = wiki_tutorial.get_message_payload()
@@ -230,8 +229,95 @@ def update_thread(**payload):
         # Update the timestamp saved on the onboarding tutorial object
         wiki_tutorial.timestamp = updated_message["ts"]
 
-        # all_done(onboarding_tutorial, channel_id)
+        # Check whether all tasks are completed
+        wiki_done(wiki_tutorial, channel_id)
 
+# =============== Explore the wiki ================ #
+@slack.RTMClient.run_on(event="reaction_added")
+def update_wiki(**payload):
+    """Update onboarding welcome message after receiving a "reaction_added"
+    event from Slack. Update timestamp for welcome message as well.
+    """
+    data = payload["data"]
+    web_client = payload["web_client"]
+    channel_id = data["item"]["channel"]
+    user_id = data["user"]
+    reaction = data.get("reaction")
+
+    # Get the original tutorial sent.
+    # onboarding_tutorial = onboarding_tutorials_sent[channel_id][user_id]
+
+    # if slack_done(onboarding_tutorial, channel_id, silent=False)
+
+    if reaction == "grinning":
+
+        # Get the original tutorial sent.
+        wiki_tutorial = wiki_tutorials_sent[channel_id][user_id]
+
+        # Mark the reaction task as completed.
+        wiki_tutorial.calendar_task_completed = True
+
+        # Get the new message payload
+        message = wiki_tutorial.get_message_payload()
+
+        # Post the updated message in Slack
+        updated_message = web_client.chat_update(**message)
+
+        # Update the timestamp saved on the onboarding tutorial object
+        wiki_tutorial.timestamp = updated_message["ts"]
+
+        # Check whether all tasks are completed
+        wiki_done(wiki_tutorial, channel_id)
+
+# =============== Explore the Quickstart guide ================ #
+@slack.RTMClient.run_on(event="reaction_added")
+def update_quickstart(**payload):
+    """Update onboarding welcome message after receiving a "reaction_added"
+    event from Slack. Update timestamp for welcome message as well.
+    """
+    data = payload["data"]
+    web_client = payload["web_client"]
+    channel_id = data["item"]["channel"]
+    user_id = data["user"]
+    reaction = data.get("reaction")
+
+    # Get the original tutorial sent.
+    # onboarding_tutorial = onboarding_tutorials_sent[channel_id][user_id]
+
+    # if slack_done(onboarding_tutorial, channel_id, silent=False)
+
+    if reaction == "sunglasses":
+
+        # Get the original tutorial sent.
+        wiki_tutorial = wiki_tutorials_sent[channel_id][user_id]
+
+        # Mark the reaction task as completed.
+        wiki_tutorial.calendar_task_completed = True
+
+        # Get the new message payload
+        message = wiki_tutorial.get_message_payload()
+
+        # Post the updated message in Slack
+        updated_message = web_client.chat_update(**message)
+
+        # Update the timestamp saved on the onboarding tutorial object
+        wiki_tutorial.timestamp = updated_message["ts"]
+
+        # Check whether all tasks are completed
+        wiki_done(wiki_tutorial, channel_id)
+
+# ============== Slack tutorial done event ============= #
+def wiki_done(tutorial, channel):
+
+    if tutorial.calendar_task_completed & tutorial.wiki_task_completed & tutorial.quickstart_task_completed:
+
+        client = slack.WebClient(token=slack_token)
+        client.chat_postMessage(
+          channel=channel,
+          text=":champagne: You're done! Don't hesitate to reach out if you have more questions.\n Welcome to Fraser Lab!"
+        )
+
+# ############## Initiate tutorials ############## #
 
 # ============== Message Events ============= #
 # When a user sends a DM, the event type will be 'message'.

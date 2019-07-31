@@ -44,8 +44,11 @@ class WikiTutorial:
         text = (
             f"{task_checkmark} *Subscribe to the Fraser lab calendar* :alarm_clock:\n"
             "We host our lab calendar on Google Calendar :google:, where you can find info on lab meetings, "
-            "seminars, and happy hours :beers:.\n"
-            "Slack Thomas to be added, and include the email account you would like added."
+            "seminars, and happy hours :beers:. "
+            "*<https://app.slack.com/client/T03KX6SN3/D3NGU2W65"
+            "|Slack Thomas to be added>* ."
+            ", and include the email account you would like added."
+            " React to this message with a :+1: when you're done."
         )
         information = (
             ":information_source: *<https://calendar.google.com/calendar/r?cid=MDc2b2xlamQxaG9xYzlpbHQ5Y2ticnMwaTBAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ|"
@@ -60,9 +63,10 @@ class WikiTutorial:
             "Info on the lab, resources, protocols, and computational guidance"
             " can be found on the wiki. Contributing to the wiki is an important duty for all labmembers."
             " Type `wiki` in a Direct Message to yourself for the link! "
-            " After logging in to Medwiki using your SUnet credentials,"
-            "*<https://app.slack.com/client/T03KX6SN3/D3NGU2W65/user_profile/W9ZFK3AG6"
+            " After logging in to Medwiki using your SUnet credentials, "
+            "*<https://app.slack.com/client/T03KX6SN3/D3NGU2W65"
             "|slack Thomas for access to our wiki>* ."
+            " React to this message with a :grinning: when you're done."
         )
         information = (
             ":information_source: *<https://stanford.service-now.com/it_services?id=kb_article&sys_id=e6a0d3cc13c33e00d08ebda12244b0b2"
@@ -77,6 +81,7 @@ class WikiTutorial:
             "Finish your onboarding by using the Fraser lab quickstart guide on our wiki. "
             " Here, you'll find more info to help get you set up, including information "
             " on lab ordering and using our computing resources."
+            " React to this message with a :sunglasses: when you're done."
         )
         information = (
             ":information_source: *<https://medwiki.stanford.edu/display/fraserlab/Fraser+Lab+Quickstart+Guide"
