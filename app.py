@@ -10,13 +10,14 @@ onboarding_tutorials_sent = {}
 wiki_tutorials_sent = {}
 
 
-def prompt_start(web_client: slack.WebClient, user_id: str, channel: str):
-
-    # Ask user to get started.
-    web_client.chat_postMessage(
-      channel=channel,
-      text=":peanut: Hello there! Write 'hey, i'm new here' to get started."
-    )
+# @slack.RTMClient.run_on(event="message")
+# def prompt_start(web_client: slack.WebClient, user_id: str, channel: str):
+#
+#     # Ask user to get started.
+#     web_client.chat_postMessage(
+#       channel=channel,
+#       text=":peanut: Hello there! Write 'hey, i'm new here' to get started."
+#     )
 
 def start_onboarding(web_client: slack.WebClient, user_id: str, channel: str):
     # Create a new onboarding tutorial.
@@ -155,7 +156,7 @@ def update_thread(**payload):
     """
     subtype = payload["data"].get("subtype")
 
-    if subtype == "message_replied":
+    if subtype == "message_replied" :
 
         data = payload["data"]
         web_client = payload["web_client"]
@@ -195,7 +196,7 @@ def slack_done(tutorial, channel):
             )
 
             # Update progress on tutorial
-            onboarding_tutorial.slack_completed = True
+            tutorial.slack_completed = True
 
 # ############## Wiki Tutorial ############## #
 
@@ -216,7 +217,7 @@ def update_calendar(**payload):
 
     # if slack_done(onboarding_tutorial, channel_id, silent=False)
 
-    if reaction == "+1":
+    if (reaction == "+1") & (onboarding_tutorials_sent[channel_id][user_id].slack_completed):
 
         # Get the original tutorial sent.
         wiki_tutorial = wiki_tutorials_sent[channel_id][user_id]
@@ -254,7 +255,7 @@ def update_wiki(**payload):
       text="%s" % reaction
     )
 
-    if reaction == "grinning":
+    if (reaction == "grinning") & (onboarding_tutorials_sent[channel_id][user_id].slack_completed):
 
         # Get the original tutorial sent.
         wiki_tutorial = wiki_tutorials_sent[channel_id][user_id]
@@ -292,7 +293,7 @@ def update_quickstart(**payload):
       text="%s" % reaction
     )
 
-    if reaction == "sunglasses":
+    if (reaction == "sunglasses") & (onboarding_tutorials_sent[channel_id][user_id].slack_completed):
 
         # Get the original tutorial sent.
         wiki_tutorial = wiki_tutorials_sent[channel_id][user_id]
@@ -327,7 +328,7 @@ def wiki_done(tutorial, channel):
             )
 
             # Update progress on tutorial
-            onboarding_tutorial.wiki_completed = True
+            tutorial.wiki_completed = True
 
 # ############## Initiate tutorials ############## #
 
