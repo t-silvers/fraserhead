@@ -191,7 +191,7 @@ def slack_done(tutorial, channel, silent=True):
         )
 
     else:
-        if silent=False: return False
+        if silent==False: return False
 
 # ############## Wiki Tutorial ############## #
 
