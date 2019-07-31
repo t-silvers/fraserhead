@@ -314,6 +314,7 @@ def wiki_done(tutorial, channel):
 
 # ############## Initiate tutorials ############## #
 
+# Hacky way to record whether prompt sent
 unprompted=True
 
 def prompt_not_sent():
