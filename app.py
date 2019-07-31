@@ -337,7 +337,7 @@ def message(**payload):
 
         web_client.chat_postMessage(
           channel=channel_id,
-          text=":peanut: Hello there! Write `Hey, i'm new here` to get started."
+          text=":peanut: Hello there! Write `Hey, I'm new here` to get started."
         )
 
         # Update whether a prompt's been sent
