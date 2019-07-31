@@ -9,6 +9,14 @@ from wiki_tutorial import WikiTutorial
 onboarding_tutorials_sent = {}
 wiki_tutorials_sent = {}
 
+
+def prompt_start(web_client: slack.WebClient, user_id: str, channel: str):
+    # Ask user to get started.
+    web_client.chat_postMessage(
+      channel=channel,
+      text=":peanut: Hello there! Write 'hey, i'm new here' to get started."
+    )
+
 def start_onboarding(web_client: slack.WebClient, user_id: str, channel: str):
     # Create a new onboarding tutorial.
     onboarding_tutorial = OnboardingTutorial(channel)
@@ -198,14 +206,8 @@ def message(**payload):
     user_id = data.get("user")
     text = data.get("text")
 
-    counter=0
-    if counter < 1 & (text and text.lower() != "hey, i'm new here"):
-        client = slack.WebClient(token=slack_token)
-        client.chat_postMessage(
-          channel=channel_id,
-          text=":peanut: Hello there! Write 'hey, i'm new here' to get started."
-        )
-        counter+=1
+    if text and text.lower() != "hey, i'm new here":
+        return prompt_start(web_client, user_id, channel_id)
 
     if text and text.lower() == "hey, i'm new here":
         return start_onboarding(web_client, user_id, channel_id)
