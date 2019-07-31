@@ -123,9 +123,13 @@ def update_thread(**payload):
         channel_id = data.get("channel")
         user_id = data.get("user")
 
-        start_onboarding(web_client, user_id, channel_id)
+        # start_onboarding(web_client, user_id, channel_id)
 
-        web_client.chat_update('test')
+        client = slack.WebClient(token=slack_token)
+        client.chat_postMessage(
+          channel=channel_id,
+          text="Hello from your app! :tada:"
+        )
 
         # # Get the original tutorial sent.
         # onboarding_tutorial = onboarding_tutorials_sent[channel_id][user_id]
