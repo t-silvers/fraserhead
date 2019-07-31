@@ -261,7 +261,7 @@ def update_wiki(**payload):
         wiki_tutorial = wiki_tutorials_sent[channel_id][user_id]
 
         # Mark the reaction task as completed.
-        wiki_tutorial.calendar_task_completed = True
+        wiki_tutorial.wiki_task_completed = True
 
         # Get the new message payload
         message = wiki_tutorial.get_message_payload()
@@ -299,7 +299,7 @@ def update_quickstart(**payload):
         wiki_tutorial = wiki_tutorials_sent[channel_id][user_id]
 
         # Mark the reaction task as completed.
-        wiki_tutorial.calendar_task_completed = True
+        wiki_tutorial.quickstart_task_completed = True
 
         # Get the new message payload
         message = wiki_tutorial.get_message_payload()

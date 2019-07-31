@@ -47,7 +47,7 @@ class WikiTutorial:
             "We host our lab calendar on Google Calendar :google:, where you can find info on lab meetings, "
             "seminars, and happy hours :beers:. "
             "*<https://app.slack.com/client/T03KX6SN3/D3NGU2W65"
-            "|Slack Thomas to be added>* ."
+            "|Slack Thomas to be added>*"
             ", and include the email account you would like added."
             " React to this message with a :+1: when you're done."
         )
@@ -66,7 +66,7 @@ class WikiTutorial:
             " Type `wiki` in a Direct Message to yourself for the link! "
             " After logging in to Medwiki using your SUnet credentials, "
             "*<https://app.slack.com/client/T03KX6SN3/D3NGU2W65"
-            "|slack Thomas for access to our wiki>* ."
+            "|slack Thomas for access to our wiki>*."
             " React to this message with a :grinning: when you're done."
         )
         information = (
