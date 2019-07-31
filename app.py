@@ -4,8 +4,10 @@ import slack
 import ssl as ssl_lib
 import certifi
 from onboarding_tutorial import OnboardingTutorial
+from wiki_tutorial import WikiTutorial
 
 onboarding_tutorials_sent = {}
+wiki_tutorials_sent = {}
 
 def start_onboarding(web_client: slack.WebClient, user_id: str, channel: str):
     # Create a new onboarding tutorial.
@@ -26,6 +28,27 @@ def start_onboarding(web_client: slack.WebClient, user_id: str, channel: str):
     if channel not in onboarding_tutorials_sent:
         onboarding_tutorials_sent[channel] = {}
     onboarding_tutorials_sent[channel][user_id] = onboarding_tutorial
+
+def start_wiki(web_client: slack.WebClient, user_id: str, channel: str):
+    # Create a new onboarding tutorial.
+    wiki_tutorial = WikiTutorial(channel)
+
+    # Get the onboarding message payload
+    message = wiki_tutorial.get_message_payload()
+
+    # Post the onboarding message in Slack
+    response = web_client.chat_postMessage(**message)
+
+    # Capture the timestamp of the message we've just posted so
+    # we can use it to update the message after a user
+    # has completed an onboarding task.
+    wiki_tutorial.timestamp = response["ts"]
+
+    # Store the message sent in onboarding_tutorials_sent
+    if channel not in wiki_tutorials_sent:
+        wiki_tutorials_sent[channel] = {}
+    wiki_tutorials_sent[channel][user_id] = wiki_tutorial
+
 
 # ================ Team Join Event =============== #
 # When the user first joins a team, the type of the event will be 'team_join'.
@@ -158,7 +181,7 @@ def all_done(tutorial, channel):
         client = slack.WebClient(token=slack_token)
         client.chat_postMessage(
           channel=channel,
-          text="Congrats :tada:! You're all done :celebrate:."
+          text="Congrats :tada:! You're all done :celebrate:.\n Write 'Tell me about the lab' to continue."
         )
 
 # ============== Message Events ============= #
@@ -177,6 +200,10 @@ def message(**payload):
 
     if text and text.lower() == "hey, i'm new here":
         return start_onboarding(web_client, user_id, channel_id)
+
+    if text and text.lower() == "Tell me about the lab":
+        return start_wiki(web_client, user_id, channel_id)
+
 
 if __name__ == "__main__":
     ssl_context = ssl_lib.create_default_context(cafile=certifi.where())
