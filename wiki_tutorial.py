@@ -42,7 +42,7 @@ class WikiTutorial:
     def _get_calendar_block(self):
         task_checkmark = self._get_checkmark(self.calendar_task_completed)
         text = (
-            f"{task_checkmark} *Subscribe to the Fraser lab calendar* :calendar:\n"
+            f"{task_checkmark} *Subscribe to the Fraser lab calendar* :alarm_clock:\n"
             "We host our lab calendar on Google Calendar :google:, where you can find info on lab meetings, "
             "seminars, and happy hours :beers:.\n"
             "Slack Thomas to be added, and include the email account you would like added."
@@ -58,10 +58,11 @@ class WikiTutorial:
         text = (
             f"{task_checkmark} *Access the lab wiki* :wikipedia:\n"
             "Info on the lab, resources, protocols, and computational guidance"
-            " can be found on the wiki. Please spend some time looking through it!"
-            " Contributing to the wiki is an important duty for all labmembers."
+            " can be found on the wiki. Contributing to the wiki is an important duty for all labmembers."
             " Type `wiki` in a Direct Message to yourself for the link! "
             " After logging in to Medwiki using your SUnet credentials, slack Thomas for access to our wiki."
+            ":information_source: *<https://app.slack.com/client/T03KX6SN3/C03KX6SP9/user_profile/W9ZFK3AG6"
+            "|Learn How to Access a Stanford School of Medicine Medwiki>*"
         )
         information = (
             ":information_source: *<https://stanford.service-now.com/it_services?id=kb_article&sys_id=e6a0d3cc13c33e00d08ebda12244b0b2"
@@ -73,7 +74,7 @@ class WikiTutorial:
         task_checkmark = self._get_checkmark(self.quickstart_task_completed)
         text = (
             f"{task_checkmark} *Read the Fraser lab quickstart guide* :sonic:\n"
-            "Finish your onboarding by using the Frase lab quickstart guide on our wiki. "
+            "Finish your onboarding by using the Fraser lab quickstart guide on our wiki. "
             " Here, you'll find more info to help get you set up, including information "
             " on lab ordering and using our computing resources."
         )
