@@ -212,11 +212,6 @@ def update_calendar(**payload):
     user_id = data["user"]
     reaction = data.get("reaction")
 
-    # Get the original tutorial sent.
-    # onboarding_tutorial = onboarding_tutorials_sent[channel_id][user_id]
-
-    # if slack_done(onboarding_tutorial, channel_id, silent=False)
-
     if (reaction == "+1") & (onboarding_tutorials_sent[channel_id][user_id].slack_completed):
 
         # Get the original tutorial sent.
@@ -249,12 +244,6 @@ def update_wiki(**payload):
     user_id = data["user"]
     reaction = data.get("reaction")
 
-    client = slack.WebClient(token=slack_token)
-    client.chat_postMessage(
-      channel=channel_id,
-      text="%s" % reaction
-    )
-
     if (reaction == "grinning") & (onboarding_tutorials_sent[channel_id][user_id].slack_completed):
 
         # Get the original tutorial sent.
@@ -286,12 +275,6 @@ def update_quickstart(**payload):
     channel_id = data["item"]["channel"]
     user_id = data["user"]
     reaction = data.get("reaction")
-
-    client = slack.WebClient(token=slack_token)
-    client.chat_postMessage(
-      channel=channel_id,
-      text="%s" % reaction
-    )
 
     if (reaction == "sunglasses") & (onboarding_tutorials_sent[channel_id][user_id].slack_completed):
 
