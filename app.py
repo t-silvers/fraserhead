@@ -109,7 +109,8 @@ def update_emoji(**payload):
     # Update the timestamp saved on the onboarding tutorial object
     onboarding_tutorial.timestamp = updated_message["ts"]
 
-    all_done(onboarding_tutorial, channel_id)
+    # Check whether all tasks are completed
+    slack_done(onboarding_tutorial, channel_id)
 
 
 # =============== Pin Added Events ================ #
@@ -140,7 +141,8 @@ def update_pin(**payload):
     # Update the timestamp saved on the onboarding tutorial object
     onboarding_tutorial.timestamp = updated_message["ts"]
 
-    all_done(onboarding_tutorial, channel_id)
+    # Check whether all tasks are completed
+    slack_done(onboarding_tutorial, channel_id)
 
 # =============== Thread a message ================ #
 # When a users threads a message, the event is a message of
@@ -180,10 +182,11 @@ def update_thread(**payload):
         # Update the timestamp saved on the onboarding tutorial object
         onboarding_tutorial.timestamp = updated_message["ts"]
 
-        all_done(onboarding_tutorial, channel_id)
+        # Check whether all tasks are completed
+        slack_done(onboarding_tutorial, channel_id)
 
 # ============== All done event ============= #
-def all_done(tutorial, channel):
+def slack_done(tutorial, channel):
 
     if tutorial.thread_task_completed & tutorial.pin_task_completed & tutorial.reaction_task_completed:
 
