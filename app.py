@@ -134,11 +134,12 @@ def update_thread(**payload):
         web_client = payload["web_client"]
         channel_id = data.get("channel")
         user_id = data.get("user")
+        other_user = data.get("message").get("replies")
 
         client = slack.WebClient(token=slack_token)
         client.chat_postMessage(
           channel=channel_id,
-          text="User id is %s\n Channel is %s" % (user_id, channel_id)
+          text="User id is %s\n Channel is %s\n other user is %s" % (user_id, channel_id, other_user)
         )
 
         # # Get the original tutorial sent.
