@@ -62,6 +62,12 @@ def update_emoji(**payload):
     channel_id = data["item"]["channel"]
     user_id = data["user"]
 
+    client = slack.WebClient(token=slack_token)
+    client.chat_postMessage(
+      channel=channel_id,
+      text="User id is %s\n Channel is %s" % (user_id, channel_id)
+    )
+
     # Get the original tutorial sent.
     onboarding_tutorial = onboarding_tutorials_sent[channel_id][user_id]
 
@@ -90,6 +96,12 @@ def update_pin(**payload):
     web_client = payload["web_client"]
     channel_id = data["channel_id"]
     user_id = data["user"]
+
+    client = slack.WebClient(token=slack_token)
+    client.chat_postMessage(
+      channel=channel_id,
+      text="User id is %s\n Channel is %s" % (user_id, channel_id)
+    )
 
     # Get the original tutorial sent.
     onboarding_tutorial = onboarding_tutorials_sent[channel_id][user_id]
@@ -123,12 +135,10 @@ def update_thread(**payload):
         channel_id = data.get("channel")
         user_id = data.get("user")
 
-        # start_onboarding(web_client, user_id, channel_id)
-
         client = slack.WebClient(token=slack_token)
         client.chat_postMessage(
           channel=channel_id,
-          text="Hello from your app! :tada:"
+          text="User id is %s\n Channel is %s" % (user_id, channel_id)
         )
 
         # # Get the original tutorial sent.
