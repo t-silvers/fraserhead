@@ -6,7 +6,7 @@ class WikiTutorial:
         "text": {
             "type": "mrkdwn",
             "text": (
-                "Now that you're familiar with slack :slack:, let's introduce you to some other tools we use. :too_cool_for_school_parrot:\n\n"
+                "Now that you're familiar with Slack :slack:, let's introduce you to some other tools we use. :too_cool_for_school_parrot:\n\n\n"
                 "*Continue by completing the steps below:*"
             ),
         },
@@ -43,12 +43,13 @@ class WikiTutorial:
         task_checkmark = self._get_checkmark(self.calendar_task_completed)
         text = (
             f"{task_checkmark} *Subscribe to the Fraser lab calendar* :calendar:\n"
-            "We host our lab calendar on Google Calendar, where you can find info on lab meetings, "
-            "seminars, and happy hours :beer: Email Thomas to be added (from the account you would like added)."
+            "We host our lab calendar on Google Calendar :google:, where you can find info on lab meetings, "
+            "seminars, and happy hours :beers:.\n"
+            "Slack Thomas to be added, and include the email account you would like added."
         )
         information = (
             ":information_source: *<https://calendar.google.com/calendar/r?cid=MDc2b2xlamQxaG9xYzlpbHQ5Y2ticnMwaTBAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ|"
-            "Access Frase Lab Calendar>*"
+            "Access Fraser Lab Calendar>*"
         )
         return self._get_task_block(text, information)
 
@@ -59,11 +60,12 @@ class WikiTutorial:
             "Info on the lab, resources, protocols, and computational guidance"
             " can be found on the wiki. Please spend some time looking through it!"
             " Contributing to the wiki is an important duty for all labmembers."
-            " Type `wiki` for the link!"
+            " Type `wiki` in a Direct Message to yourself for the link! "
+            " After logging in to Medwiki using your SUnet credentials, slack Thomas for access to our wiki."
         )
         information = (
-            ":information_source: *<https://get.slack.help/hc/en-us/articles/205239997-Pinning-messages-and-files"
-            "|Learn How to Pin a Message>*"
+            ":information_source: *<https://stanford.service-now.com/it_services?id=kb_article&sys_id=e6a0d3cc13c33e00d08ebda12244b0b2"
+            "|Learn How to Access a Stanford School of Medicine Medwiki>*"
         )
         return self._get_task_block(text, information)
 
@@ -71,13 +73,13 @@ class WikiTutorial:
         task_checkmark = self._get_checkmark(self.quickstart_task_completed)
         text = (
             f"{task_checkmark} *Read the Fraser lab quickstart guide* :sonic:\n"
-            "Threads keep discussions in Slack organized. A thread will remain connected to its original message, "
-            " and only those that have contributed to it or who are following it will be notified of new replies. "
-            "(Unless you check the box to the left of `Also send to #channel-name`.)"
+            "Finish your onboarding by using the Frase lab quickstart guide on our wiki. "
+            " Here, you'll find more info to help get you set up, including information "
+            " on lab ordering and using our computing resources."
         )
         information = (
-            ":information_source: *<https://get.slack.help/hc/en-us/articles/115000769927-Use-threads-to-organize-discussions-#-start-or-reply-to-a-thread"
-            "|Learn How to Start a Thread>*"
+            ":information_source: *<https://medwiki.stanford.edu/display/fraserlab/Fraser+Lab+Quickstart+Guide"
+            "|Read our Quickstart Guide>*"
         )
         return self._get_task_block(text, information)
 
