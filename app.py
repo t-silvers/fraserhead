@@ -328,12 +328,21 @@ def message(**payload):
     user_id = data.get("user")
     text = data.get("text")
 
-    if (text and text.lower() != "hey, i'm new here") & (":peanut:" not in text):
+    onboarding_tutorial = onboarding_tutorials_sent[channel_id][user_id]
+    wiki_tutorial = wiki_tutorials_sent[channel_id][user_id]
+
+    if (text and text.lower() != "hey, i'm new here")  & \
+        (onboarding_tutorial.prompt) & \
+        (wiki_tutorial.prompt):
 
         web_client.chat_postMessage(
           channel=channel_id,
           text=":peanut: Hello there! Write `Hey, i'm new here` to get started."
         )
+
+        # Update whether a prompt's been sent
+        onboarding_tutorial.prompt = False
+        wiki_tutorial.prompt = False
 
     if text and text.lower() == "hey, i'm new here":
         return start_onboarding(web_client, user_id, channel_id)

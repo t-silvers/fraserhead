@@ -18,6 +18,7 @@ class OnboardingTutorial:
         self.username = "Fraserhead"
         self.icon_emoji = ":hunter-yas:"
         self.timestamp = ""
+        self.prompt = True
         self.reaction_task_completed = False
         self.pin_task_completed = False
         self.thread_task_completed = False

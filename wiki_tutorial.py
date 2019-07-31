@@ -18,6 +18,7 @@ class WikiTutorial:
         self.username = "Fraserhead"
         self.icon_emoji = ":rio_the_zonkey:"
         self.timestamp = ""
+        self.prompt = True
         self.calendar_task_completed = False
         self.wiki_task_completed = False
         self.quickstart_task_completed = False
