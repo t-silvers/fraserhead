@@ -307,7 +307,7 @@ def wiki_done(tutorial, channel):
             client = slack.WebClient(token=slack_token)
             client.chat_postMessage(
               channel=channel,
-              text=":champagne: You're done! Don't hesitate to reach out if you have more questions.\n Welcome to Fraser Lab!"
+              text=f":champagne: You're done! Don't hesitate to reach out if you have more questions.\n *Welcome to Fraser Lab!*"
             )
 
             # Update progress on tutorial
