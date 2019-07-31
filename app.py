@@ -331,7 +331,7 @@ def message(**payload):
     if text and text.lower() != "hey, i'm new here":
 
         web_client.chat_postMessage(
-          channel=channel,
+          channel=channel_id,
           text=":peanut: Hello there! Write `Hey, i'm new here` to get started."
         )
 
