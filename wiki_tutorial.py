@@ -21,6 +21,7 @@ class WikiTutorial:
         self.calendar_task_completed = False
         self.wiki_task_completed = False
         self.quickstart_task_completed = False
+        self.wiki_completed = False
 
     def get_message_payload(self):
         return {

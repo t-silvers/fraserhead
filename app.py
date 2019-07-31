@@ -11,6 +11,7 @@ wiki_tutorials_sent = {}
 
 
 def prompt_start(web_client: slack.WebClient, user_id: str, channel: str):
+
     # Ask user to get started.
     web_client.chat_postMessage(
       channel=channel,
@@ -180,18 +181,21 @@ def update_thread(**payload):
         slack_done(onboarding_tutorial, channel_id)
 
 # ============== Slack tutorial done event ============= #
-def slack_done(tutorial, channel, silent=True):
+
+def slack_done(tutorial, channel):
 
     if tutorial.thread_task_completed & tutorial.pin_task_completed & tutorial.reaction_task_completed:
 
-        client = slack.WebClient(token=slack_token)
-        client.chat_postMessage(
-          channel=channel,
-          text="Congrats :tada:! You're done learning about slack :celebrate:. We depend heavily on slack here.\n Write `Tell me about the lab` to continue."
-        )
+        if not tutorial.slack_completed:
 
-    else:
-        if silent==False: return False
+            client = slack.WebClient(token=slack_token)
+            client.chat_postMessage(
+              channel=channel,
+              text="Congrats :tada:! You're done learning about slack :celebrate:. We depend heavily on slack here.\n Write `Tell me about the lab` to continue."
+            )
+
+            # Update progress on tutorial
+            onboarding_tutorial.slack_completed = True
 
 # ############## Wiki Tutorial ############## #
 
@@ -244,10 +248,11 @@ def update_wiki(**payload):
     user_id = data["user"]
     reaction = data.get("reaction")
 
-    # Get the original tutorial sent.
-    # onboarding_tutorial = onboarding_tutorials_sent[channel_id][user_id]
-
-    # if slack_done(onboarding_tutorial, channel_id, silent=False)
+    client = slack.WebClient(token=slack_token)
+    client.chat_postMessage(
+      channel=channel_id,
+      text="%s" % reaction
+    )
 
     if reaction == "grinning":
 
@@ -281,10 +286,11 @@ def update_quickstart(**payload):
     user_id = data["user"]
     reaction = data.get("reaction")
 
-    # Get the original tutorial sent.
-    # onboarding_tutorial = onboarding_tutorials_sent[channel_id][user_id]
-
-    # if slack_done(onboarding_tutorial, channel_id, silent=False)
+    client = slack.WebClient(token=slack_token)
+    client.chat_postMessage(
+      channel=channel_id,
+      text="%s" % reaction
+    )
 
     if reaction == "sunglasses":
 
@@ -307,15 +313,21 @@ def update_quickstart(**payload):
         wiki_done(wiki_tutorial, channel_id)
 
 # ============== Slack tutorial done event ============= #
+
 def wiki_done(tutorial, channel):
 
     if tutorial.calendar_task_completed & tutorial.wiki_task_completed & tutorial.quickstart_task_completed:
 
-        client = slack.WebClient(token=slack_token)
-        client.chat_postMessage(
-          channel=channel,
-          text=":champagne: You're done! Don't hesitate to reach out if you have more questions.\n Welcome to Fraser Lab!"
-        )
+        if not tutorial.wiki_completed:
+
+            client = slack.WebClient(token=slack_token)
+            client.chat_postMessage(
+              channel=channel,
+              text=":champagne: You're done! Don't hesitate to reach out if you have more questions.\n Welcome to Fraser Lab!"
+            )
+
+            # Update progress on tutorial
+            onboarding_tutorial.wiki_completed = True
 
 # ############## Initiate tutorials ############## #
 

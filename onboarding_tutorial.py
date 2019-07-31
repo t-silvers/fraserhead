@@ -21,6 +21,7 @@ class OnboardingTutorial:
         self.reaction_task_completed = False
         self.pin_task_completed = False
         self.thread_task_completed = False
+        self.slack_completed = False
 
     def get_message_payload(self):
         return {
