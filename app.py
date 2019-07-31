@@ -5,6 +5,7 @@ import ssl as ssl_lib
 import certifi
 from onboarding_tutorial import OnboardingTutorial
 from wiki_tutorial import WikiTutorial
+from prompt import Prompt
 
 onboarding_tutorials_sent = {}
 wiki_tutorials_sent = {}
@@ -313,10 +314,6 @@ def wiki_done(tutorial, channel):
             tutorial.wiki_completed = True
 
 # ############## Initiate tutorials ############## #
-
-class Prompt:
-    def __init__(self, channel):
-        self.prompt = True
 
 # ============== Message Events ============= #
 # When a user sends a DM, the event type will be 'message'.
