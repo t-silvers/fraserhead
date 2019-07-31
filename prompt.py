@@ -1,3 +1,3 @@
 class Prompt:
-    def __init__(self, channel):
+    def __init__(self):
         self.prompt = True
