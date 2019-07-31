@@ -314,6 +314,10 @@ def wiki_done(tutorial, channel):
 
 # ############## Initiate tutorials ############## #
 
+class Prompt:
+    def __init__(self, channel):
+        self.prompt = True
+
 # ============== Message Events ============= #
 # When a user sends a DM, the event type will be 'message'.
 # Here we'll link the update_share callback to the 'message' event.
@@ -328,17 +332,7 @@ def message(**payload):
     user_id = data.get("user")
     text = data.get("text")
 
-    web_client.chat_postMessage(
-      channel=channel_id,
-      text="%s" % data
-    )
-
-    onboarding_tutorial = onboarding_tutorials_sent[channel_id][user_id]
-    wiki_tutorial = wiki_tutorials_sent[channel_id][user_id]
-
-    if (text and text.lower() != "hey, i'm new here")  & \
-        (onboarding_tutorial.prompt) & \
-        (wiki_tutorial.prompt):
+    if (text and text.lower() != "hey, i'm new here") & (Prompt.prompt):
 
         web_client.chat_postMessage(
           channel=channel_id,
@@ -346,8 +340,7 @@ def message(**payload):
         )
 
         # Update whether a prompt's been sent
-        onboarding_tutorial.prompt = False
-        wiki_tutorial.prompt = False
+        Prompt.prompt = False
 
     if text and text.lower() == "hey, i'm new here":
         return start_onboarding(web_client, user_id, channel_id)
