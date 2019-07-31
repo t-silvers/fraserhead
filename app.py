@@ -333,16 +333,18 @@ def message(**payload):
     user_id = data.get("user")
     text = data.get("text")
 
-    if (text and text.lower() != "hey, i'm new here") & (prompt_not_sent()):
+    if prompt_not_sent():
 
-        web_client.chat_postMessage(
-          channel=channel_id,
-          text=":peanut: Hello there! Write `Hey, I'm new here` to get started."
-        )
+        if text and text.lower() != "hey, i'm new here":
 
-        # Update whether a prompt's been sent
-        global unprompted
-        unprompted = False
+            web_client.chat_postMessage(
+              channel=channel_id,
+              text=":peanut: Hello there! Write `Hey, I'm new here` to get started."
+            )
+
+            # Update whether a prompt's been sent
+            global unprompted
+            unprompted = False
 
     if text and text.lower() == "hey, i'm new here":
         return start_onboarding(web_client, user_id, channel_id)
