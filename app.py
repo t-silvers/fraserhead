@@ -198,6 +198,13 @@ def message(**payload):
     user_id = data.get("user")
     text = data.get("text")
 
+    if text and text.lower() != "hey, i'm new here":
+        client = slack.WebClient(token=slack_token)
+        client.chat_postMessage(
+          channel=channel_id,
+          text=":peanut: Hello there! Write 'hey, i'm new here' to get started."
+        )
+
     if text and text.lower() == "hey, i'm new here":
         return start_onboarding(web_client, user_id, channel_id)
 
