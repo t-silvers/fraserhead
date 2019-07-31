@@ -328,7 +328,7 @@ def message(**payload):
     user_id = data.get("user")
     text = data.get("text")
 
-    if text and text.lower() != "hey, i'm new here":
+    if (text and text.lower() != "hey, i'm new here") & (":peanut:" not in text):
 
         web_client.chat_postMessage(
           channel=channel_id,
