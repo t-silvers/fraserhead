@@ -77,6 +77,8 @@ def update_emoji(**payload):
     # Update the timestamp saved on the onboarding tutorial object
     onboarding_tutorial.timestamp = updated_message["ts"]
 
+    all_done(onboarding_tutorial, channel_id)
+
 
 # =============== Pin Added Events ================ #
 # When a users pins a message the type of the event will be 'pin_added'.
@@ -105,6 +107,8 @@ def update_pin(**payload):
 
     # Update the timestamp saved on the onboarding tutorial object
     onboarding_tutorial.timestamp = updated_message["ts"]
+
+    all_done(onboarding_tutorial, channel_id)
 
 # =============== Thread a message ================ #
 # When a users threads a message, the event is a message of
@@ -143,6 +147,19 @@ def update_thread(**payload):
 
         # Update the timestamp saved on the onboarding tutorial object
         onboarding_tutorial.timestamp = updated_message["ts"]
+
+    all_done(onboarding_tutorial, channel_id)
+
+# ============== All done event ============= #
+def all_done(tutorial, channel):
+
+    if tutorial.thread_task_completed & tutorial.pin_task_completed & tutorial.reaction_task_completed:
+
+        client = slack.WebClient(token=slack_token)
+        client.chat_postMessage(
+          channel=channel,
+          text="Congrats :tada:! You're all done :celebrate:."
+        )
 
 # ============== Message Events ============= #
 # When a user sends a DM, the event type will be 'message'.
