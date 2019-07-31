@@ -53,7 +53,7 @@ def start_wiki(web_client: slack.WebClient, user_id: str, channel: str):
 # ================ Team Join Event =============== #
 # When the user first joins a team, the type of the event will be 'team_join'.
 # Here we'll link the onboarding_message callback to the 'team_join' event.
-@slack.RTMClient.run_on(event=".team_join")
+@slack.RTMClient.run_on(event="team_join")
 def onboarding_message(**payload):
     """Create and send an onboarding welcome message to new users. Save the
     time stamp of this message so we can update this message in the future.
