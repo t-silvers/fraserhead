@@ -148,7 +148,7 @@ def update_thread(**payload):
         # Update the timestamp saved on the onboarding tutorial object
         onboarding_tutorial.timestamp = updated_message["ts"]
 
-    all_done(onboarding_tutorial, channel_id)
+        all_done(onboarding_tutorial, channel_id)
 
 # ============== All done event ============= #
 def all_done(tutorial, channel):
