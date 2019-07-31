@@ -7,7 +7,7 @@ class WikiTutorial:
             "type": "mrkdwn",
             "text": (
                 "Now that you're familiar with slack :slack:, let's introduce you to some other tools we use. :too_cool_for_school_parrot:\n\n"
-                "*Get started by completing the steps below:*"
+                "*Continue by completing the steps below:*"
             ),
         },
     }
@@ -42,13 +42,13 @@ class WikiTutorial:
     def _get_calendar_block(self):
         task_checkmark = self._get_checkmark(self.calendar_task_completed)
         text = (
-            f"{task_checkmark} *Add an emoji reaction to this message* :thinking_face:\n"
-            "You can quickly respond to any message on Slack with an emoji reaction. "
-            "Reactions can be used for any purpose: voting, checking off to-do items, showing excitement."
+            f"{task_checkmark} *Subscribe to the Fraser lab calendar* :calendar:\n"
+            "We host our lab calendar on Google Calendar, where you can find info on lab meetings, "
+            "seminars, and happy hours :beer: Email Thomas to be added (from the account you would like added)."
         )
         information = (
-            ":information_source: *<https://get.slack.help/hc/en-us/articles/206870317-Emoji-reactions|"
-            "Learn How to Use Emoji Reactions>*"
+            ":information_source: *<https://calendar.google.com/calendar/r?cid=MDc2b2xlamQxaG9xYzlpbHQ5Y2ticnMwaTBAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ|"
+            "Access Frase Lab Calendar>*"
         )
         return self._get_task_block(text, information)
 
@@ -70,7 +70,7 @@ class WikiTutorial:
     def _get_quickstart_block(self):
         task_checkmark = self._get_checkmark(self.quickstart_task_completed)
         text = (
-            f"{task_checkmark} *Start a thread* :scroll:\n"
+            f"{task_checkmark} *Read the Fraser lab quickstart guide* :sonic:\n"
             "Threads keep discussions in Slack organized. A thread will remain connected to its original message, "
             " and only those that have contributed to it or who are following it will be notified of new replies. "
             "(Unless you check the box to the left of `Also send to #channel-name`.)"
