@@ -18,9 +18,9 @@ class WikiTutorial:
         self.username = "Fraserhead"
         self.icon_emoji = ":rio_the_zonkey:"
         self.timestamp = ""
-        self.reaction_task_completed = False
-        self.pin_task_completed = False
-        self.thread_task_completed = False
+        self.calendar_task_completed = False
+        self.wiki_task_completed = False
+        self.quickstart_task_completed = False
 
     def get_message_payload(self):
         return {
@@ -31,16 +31,16 @@ class WikiTutorial:
             "blocks": [
                 self.WELCOME_BLOCK,
                 self.DIVIDER_BLOCK,
-                *self._get_reaction_block(),
+                *self._get_calendar_block(),
                 self.DIVIDER_BLOCK,
-                *self._get_pin_block(),
+                *self._get_wiki_block(),
                 self.DIVIDER_BLOCK,
-                *self._get_thread_block(),
+                *self._get_quickstart_block(),
             ],
         }
 
-    def _get_reaction_block(self):
-        task_checkmark = self._get_checkmark(self.reaction_task_completed)
+    def _get_calendar_block(self):
+        task_checkmark = self._get_checkmark(self.calendar_task_completed)
         text = (
             f"{task_checkmark} *Add an emoji reaction to this message* :thinking_face:\n"
             "You can quickly respond to any message on Slack with an emoji reaction. "
@@ -52,12 +52,14 @@ class WikiTutorial:
         )
         return self._get_task_block(text, information)
 
-    def _get_pin_block(self):
-        task_checkmark = self._get_checkmark(self.pin_task_completed)
+    def _get_wiki_block(self):
+        task_checkmark = self._get_checkmark(self.wiki_task_completed)
         text = (
-            f"{task_checkmark} *Pin this message* :round_pushpin:\n"
-            "Important messages and files can be pinned to the details pane in any channel or"
-            " direct message, including group messages, for easy reference."
+            f"{task_checkmark} *Access the lab wiki* :wikipedia:\n"
+            "Info on the lab, resources, protocols, and computational guidance"
+            " can be found on the wiki. Please spend some time looking through it!"
+            " Contributing to the wiki is an important duty for all labmembers."
+            " Type `wiki` for the link!"
         )
         information = (
             ":information_source: *<https://get.slack.help/hc/en-us/articles/205239997-Pinning-messages-and-files"
@@ -65,8 +67,8 @@ class WikiTutorial:
         )
         return self._get_task_block(text, information)
 
-    def _get_thread_block(self):
-        task_checkmark = self._get_checkmark(self.thread_task_completed)
+    def _get_quickstart_block(self):
+        task_checkmark = self._get_checkmark(self.quickstart_task_completed)
         text = (
             f"{task_checkmark} *Start a thread* :scroll:\n"
             "Threads keep discussions in Slack organized. A thread will remain connected to its original message, "

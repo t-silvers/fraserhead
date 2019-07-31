@@ -78,6 +78,7 @@ def onboarding_message(**payload):
     # Post the onboarding message.
     start_onboarding(web_client, user_id, channel)
 
+# ############## Slack Tutorial ############## #
 
 # ============= Reaction Added Events ============= #
 # When a users adds an emoji reaction to the onboarding message,
@@ -189,8 +190,45 @@ def all_done(tutorial, channel):
         client = slack.WebClient(token=slack_token)
         client.chat_postMessage(
           channel=channel,
-          text="Congrats :tada:! You're done learning about slack :celebrate:. We depend heavily on slack here.\n Write 'Tell me about the lab' to continue."
+          text="Congrats :tada:! You're done learning about slack :celebrate:. We depend heavily on slack here.\n Write `Tell me about the lab` to continue."
         )
+
+# ############## Wiki Tutorial ############## #
+
+# =============== Explore the wiki ================ #
+# When a users threads a message, the event is a message of
+# subtype message_replied.
+@slack.RTMClient.run_on(event="message")
+def update_thread(**payload):
+    """Update onboarding welcome message after receiving a "pin_added"
+    event from Slack. Update timestamp for welcome message as well.
+    """
+    text = payload["data"].get("text")
+
+    if text == "wiki":
+
+        data = payload["data"]
+        web_client = payload["web_client"]
+        channel_id = data.get("channel")
+        user_id = data.get("user")
+
+        # Get the original tutorial sent.
+        wiki_tutorial = wiki_tutorials_sent[channel_id][user_id]
+
+        # Mark the pin task as completed.
+        wiki_tutorial.wiki_task_completed = True
+
+        # Get the new message payload
+        message = wiki_tutorial.get_message_payload()
+
+        # Post the updated message in Slack
+        updated_message = web_client.chat_update(**message)
+
+        # Update the timestamp saved on the onboarding tutorial object
+        wiki_tutorial.timestamp = updated_message["ts"]
+
+        # all_done(onboarding_tutorial, channel_id)
+
 
 # ============== Message Events ============= #
 # When a user sends a DM, the event type will be 'message'.
