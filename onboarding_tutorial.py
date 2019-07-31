@@ -71,7 +71,7 @@ class OnboardingTutorial:
             f"{task_checkmark} *Start a thread* :scroll:\n"
             "Threads keep discussions in Slack organized. A thread will remain connected to its original message, "
             " and only those that have contributed to it or who are following it will be notified of new replies. "
-            "(Unless you check the box to the left of Also send to #channel-name.)"
+            "(Unless you check the box to the left of `Also send to #channel-name`.)"
         )
         information = (
             ":information_source: *<https://get.slack.help/hc/en-us/articles/115000769927-Use-threads-to-organize-discussions-#-start-or-reply-to-a-thread"
