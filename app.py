@@ -10,7 +10,6 @@ onboarding_tutorials_sent = {}
 wiki_tutorials_sent = {}
 
 
-# @slack.RTMClient.run_on(event="message")
 # def prompt_start(web_client: slack.WebClient, user_id: str, channel: str):
 #
 #     # Ask user to get started.
@@ -307,7 +306,7 @@ def wiki_done(tutorial, channel):
             client = slack.WebClient(token=slack_token)
             client.chat_postMessage(
               channel=channel,
-              text=":champagne: You're done! Don't hesitate to reach out if you have more questions.\n Welcome to Fraser Lab!"
+              text=":champagne: You're done! Don't hesitate to reach out if you have more questions.\n\n\n Welcome to Fraser Lab!"
             )
 
             # Update progress on tutorial
@@ -329,8 +328,12 @@ def message(**payload):
     user_id = data.get("user")
     text = data.get("text")
 
-    # if text and text.lower() != "hey, i'm new here":
-    #     return prompt_start(web_client, user_id, channel_id)
+    if text and text.lower() != "hey, i'm new here":
+
+        web_client.chat_postMessage(
+          channel=channel,
+          text=":peanut: Hello there! Write `Hey, i'm new here` to get started."
+        )
 
     if text and text.lower() == "hey, i'm new here":
         return start_onboarding(web_client, user_id, channel_id)
