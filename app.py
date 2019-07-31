@@ -206,8 +206,8 @@ def message(**payload):
     user_id = data.get("user")
     text = data.get("text")
 
-    if text and text.lower() != "hey, i'm new here":
-        return prompt_start(web_client, user_id, channel_id)
+    # if text and text.lower() != "hey, i'm new here":
+    #     return prompt_start(web_client, user_id, channel_id)
 
     if text and text.lower() == "hey, i'm new here":
         return start_onboarding(web_client, user_id, channel_id)

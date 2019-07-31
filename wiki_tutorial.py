@@ -6,7 +6,7 @@ class WikiTutorial:
         "text": {
             "type": "mrkdwn",
             "text": (
-                "Welcome to Fraser Lab! :wave: We're so glad you're here. :blush:\n\n"
+                "Now that you're familiar with slack :slack:, let's introduce you to some other tools we use. :too_cool_for_school_parrot:\n\n"
                 "*Get started by completing the steps below:*"
             ),
         },
@@ -16,7 +16,7 @@ class WikiTutorial:
     def __init__(self, channel):
         self.channel = channel
         self.username = "Fraserhead"
-        self.icon_emoji = ":hunter-yas:"
+        self.icon_emoji = ":rio_the_zonkey:"
         self.timestamp = ""
         self.reaction_task_completed = False
         self.pin_task_completed = False
