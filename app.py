@@ -181,7 +181,7 @@ def all_done(tutorial, channel):
         client = slack.WebClient(token=slack_token)
         client.chat_postMessage(
           channel=channel,
-          text="Congrats :tada:! You're all done :celebrate:.\n Write 'Tell me about the lab' to continue."
+          text="Congrats :tada:! You're done learning about slack :celebrate:. We depend heavily on slack here.\n Write 'Tell me about the lab' to continue."
         )
 
 # ============== Message Events ============= #
@@ -201,7 +201,7 @@ def message(**payload):
     if text and text.lower() == "hey, i'm new here":
         return start_onboarding(web_client, user_id, channel_id)
 
-    if text and text.lower() == "Tell me about the lab":
+    if text and text.lower() == "tell me about the lab":
         return start_wiki(web_client, user_id, channel_id)
 
 
