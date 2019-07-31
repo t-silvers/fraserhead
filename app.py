@@ -5,7 +5,6 @@ import ssl as ssl_lib
 import certifi
 from onboarding_tutorial import OnboardingTutorial
 from wiki_tutorial import WikiTutorial
-from prompt import Prompt
 
 onboarding_tutorials_sent = {}
 wiki_tutorials_sent = {}
@@ -315,6 +314,11 @@ def wiki_done(tutorial, channel):
 
 # ############## Initiate tutorials ############## #
 
+unprompted=True
+
+def prompt_not_sent():
+    return unprompted
+
 # ============== Message Events ============= #
 # When a user sends a DM, the event type will be 'message'.
 # Here we'll link the update_share callback to the 'message' event.
@@ -329,7 +333,7 @@ def message(**payload):
     user_id = data.get("user")
     text = data.get("text")
 
-    if (text and text.lower() != "hey, i'm new here") & (Prompt.prompt):
+    if (text and text.lower() != "hey, i'm new here") & (prompt_not_sent()):
 
         web_client.chat_postMessage(
           channel=channel_id,
@@ -337,7 +341,8 @@ def message(**payload):
         )
 
         # Update whether a prompt's been sent
-        Prompt.prompt = False
+        global unprompted
+        unprompted = False
 
     if text and text.lower() == "hey, i'm new here":
         return start_onboarding(web_client, user_id, channel_id)
