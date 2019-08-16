@@ -306,10 +306,13 @@ def wiki_done(tutorial, channel):
 # ############## Initiate tutorials ############## #
 
 # Hacky way to record whether prompt sent
-unprompted=True
+prompted_users=[]
 
-def prompt_not_sent():
-    return unprompted
+def prompt_not_sent(user):
+    if user not in prompted_users:
+        return True
+    elif user in prompted_users:
+        return False
 
 # ============== Message Events ============= #
 # When a user sends a DM, the event type will be 'message'.
@@ -325,7 +328,7 @@ def message(**payload):
     user_id = data.get("user")
     text = data.get("text")
 
-    if prompt_not_sent():
+    if prompt_not_sent(user_id):
 
         if text and text.lower() != "hey, i'm new here":
 
@@ -335,8 +338,7 @@ def message(**payload):
             )
 
             # Update whether a prompt's been sent
-            global unprompted
-            unprompted = False
+            prompted_users.append(user_id)
 
     if text and text.lower() == "hey, i'm new here":
         return start_onboarding(web_client, user_id, channel_id)
